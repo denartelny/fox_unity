@@ -28,7 +28,8 @@ public class Fox : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             rb.AddForce(transform.up * jump, ForceMode2D.Impulse);
-        }
+        }        
+    
 
         //Если двигаемся, то включи анимацию бега и поеврни модельку в нужную стороны 
         if (Input.GetAxis("Horizontal") != 0)
@@ -68,7 +69,7 @@ public class Fox : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Finish")
+        if (collision.gameObject.tag == "House")
         {
             SceneManager.LoadScene("SampleScene");
         }
