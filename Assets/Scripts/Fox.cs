@@ -13,6 +13,8 @@ public class Fox : MonoBehaviour
     //Сила прыжка
     public int jump;
 
+    public Boolean foxStandsOnLand = true;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -25,11 +27,11 @@ public class Fox : MonoBehaviour
         rb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, rb.velocity.y);
 
         //Если нажали пробел (Space), то прыжок
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && foxStandsOnLand == true)
         {
             rb.AddForce(transform.up * jump, ForceMode2D.Impulse);
-        }        
-    
+        }
+
 
         //Если двигаемся, то включи анимацию бега и поеврни модельку в нужную стороны 
         if (Input.GetAxis("Horizontal") != 0)
@@ -71,7 +73,20 @@ public class Fox : MonoBehaviour
     {
         if (collision.gameObject.tag == "House")
         {
-            SceneManager.LoadScene("SampleScene");
+            SceneManager.LoadScene("Level2");
+        }
+        if (collision.gameObject.tag == "Land")
+        {
+            foxStandsOnLand = true;
+        }
+
+    }
+
+    void OnCollisionExit2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Land")
+        {
+            foxStandsOnLand = false;
         }
     }
 }

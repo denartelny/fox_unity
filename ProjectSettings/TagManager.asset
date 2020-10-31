@@ -9,6 +9,8 @@ TagManager:
   - End
   - Hose
   - House
+  - side
+  - Land
   layers:
   - Default
   - TransparentFX
