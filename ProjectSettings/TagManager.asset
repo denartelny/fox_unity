@@ -11,6 +11,8 @@ TagManager:
   - House
   - side
   - Land
+  - House(L.2)
+  - Enemie
   layers:
   - Default
   - TransparentFX

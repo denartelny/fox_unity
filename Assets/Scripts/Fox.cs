@@ -12,7 +12,8 @@ public class Fox : MonoBehaviour
 
     //Сила прыжка
     public int jump;
-
+    
+    //Стоит лиса на земле, или нет
     public Boolean foxStandsOnLand = true;
 
     void Start()
@@ -29,10 +30,21 @@ public class Fox : MonoBehaviour
         //Если нажали пробел (Space), то прыжок
         if (Input.GetKeyDown(KeyCode.Space) && foxStandsOnLand == true)
         {
+            anim.SetBool("isJumping", true);
             rb.AddForce(transform.up * jump, ForceMode2D.Impulse);
         }
 
-
+        if(Input.GetKeyDown(KeyCode.C))
+        {
+            anim.SetBool("isCrouching", true);
+            speed /=2;
+        }
+        else
+        if (Input.GetKeyUp(KeyCode.C))
+        {
+            anim.SetBool("isCrouching", false);
+            speed *= 2;
+        }
         //Если двигаемся, то включи анимацию бега и поеврни модельку в нужную стороны 
         if (Input.GetAxis("Horizontal") != 0)
         {
@@ -73,9 +85,13 @@ public class Fox : MonoBehaviour
     {
         if (collision.gameObject.tag == "House")
         {
-            SceneManager.LoadScene("Level2");
+            SceneManager.LoadScene("SampleScene");
         }
-        if (collision.gameObject.tag == "Land")
+        if (collision.gameObject.tag == "House(L.2)")
+        {
+            SceneManager.LoadScene("SampleScene");
+        }
+if (collision.gameObject.tag == "Land")
         {
             foxStandsOnLand = true;
         }
@@ -87,6 +103,8 @@ public class Fox : MonoBehaviour
         if (other.gameObject.tag == "Land")
         {
             foxStandsOnLand = false;
+            anim.SetBool("isJumping", false);
         }
+        
     }
 }

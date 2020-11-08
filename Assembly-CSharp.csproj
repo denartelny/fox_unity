@@ -65,6 +65,8 @@
   <ItemGroup>
     <Compile Include="Assets\Free Pixel Art Forest\Demo\MoveBackground.cs" />
     <Compile Include="Assets\Scripts\Fox.cs" />
+    <Compile Include="Assets\Scripts\FrogScript.cs" />
+    <Compile Include="Assets\Scripts\OpossumScript.cs" />
     <None Include="Assets\Free Pixel Art Forest\readme.txt" />
     <None Include="Assets\Free Pixel Art Forest\Contact.txt" />
     <None Include="Assets\Free Pixel Art Forest\Lisense.txt" />
