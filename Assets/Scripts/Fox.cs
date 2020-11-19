@@ -9,6 +9,7 @@ public class Fox : MonoBehaviour
 
     //Скорость движения лисы
     public int speed;
+    public int lastSpeed;
 
     //Сила прыжка
     public int jump;
@@ -30,20 +31,36 @@ public class Fox : MonoBehaviour
         //Если нажали пробел (Space), то прыжок
         if (Input.GetKeyDown(KeyCode.Space) && foxStandsOnLand == true)
         {
-            anim.SetBool("isJumping", true);
             rb.AddForce(transform.up * jump, ForceMode2D.Impulse);
+            anim.SetBool("isJumping", true);
+           // if (rb.velocity.x > 0)
+           // {
+                //если движение вверх
+              //  anim.SetBool("Up", true);
+          //  }
+           // else if (rb.velocity.x < 0)
+           // {
+                //движение вниз
+             //   anim.SetBool("Down", true);
+           // }
+           // else
+           // {
+                //движения нет
+              //  anim.SetBool("isRunning", false);
+            //}
         }
 
         if(Input.GetKeyDown(KeyCode.C))
         {
             anim.SetBool("isCrouching", true);
-            speed /=2;
+            lastSpeed = speed;
+            speed = 0;
         }
         else
         if (Input.GetKeyUp(KeyCode.C))
         {
             anim.SetBool("isCrouching", false);
-            speed *= 2;
+            speed = lastSpeed;
         }
         //Если двигаемся, то включи анимацию бега и поеврни модельку в нужную стороны 
         if (Input.GetAxis("Horizontal") != 0)
@@ -87,10 +104,7 @@ public class Fox : MonoBehaviour
         {
             SceneManager.LoadScene("SampleScene");
         }
-        if (collision.gameObject.tag == "House(L.2)")
-        {
-            SceneManager.LoadScene("SampleScene");
-        }
+
 if (collision.gameObject.tag == "Land")
         {
             foxStandsOnLand = true;
